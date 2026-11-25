@@ -1,0 +1,12 @@
+{
+  "name": "altincekicsunroof",
+  "version": "1.0.0",
+  "description": "Altincekic Sunroof - Bursa Nilufer web sitesi ve usta medya paneli",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

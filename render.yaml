@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: altincekicsunroof
+    runtime: node
+    plan: free
+    buildCommand: ""
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_PASSWORD
+        value: AcS-2026!Bursa#77
