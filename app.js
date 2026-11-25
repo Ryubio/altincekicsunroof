@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = '905415903077';
+const WHATSAPP_NUMBER = '905334771406';
 
 // Mobile Menu
 const menuToggle = document.getElementById('menuToggle');
@@ -203,7 +203,7 @@ if (waForm) {
     }
 
     const msg =
-      `Merhaba Altınçekiç Sunroof,%0A` +
+      `Merhaba Halil Usta (Altınçekiç Sunroof),%0A` +
       `Ad Soyad: ${encodeURIComponent(fullName)}%0A` +
       (phone ? `Telefon: ${encodeURIComponent(phone)}%0A` : '') +
       `Araç: ${encodeURIComponent(carModel)}%0A` +
