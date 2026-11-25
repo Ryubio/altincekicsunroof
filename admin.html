@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usta Girişi — Medya Yönetimi | Altınçekiç Sunroof</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f3f4f6;
+      color: #16181d;
+      line-height: 1.5;
+    }
+    .topbar {
+      background: #16181d;
+      color: #fff;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .topbar strong { font-size: 1rem; }
+    .topbar a, .topbar button {
+      color: #fff;
+      background: #2b303a;
+      border: 1px solid #3f4654;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .wrap {
+      width: min(980px, 94%);
+      margin: 1.5rem auto 4rem;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #dcdfe5;
+      border-radius: 10px;
+      padding: 1.35rem;
+      margin-bottom: 1.35rem;
+    }
+    h1, h2 { margin: 0 0 0.6rem; font-size: 1.2rem; }
+    .muted { color: #5c6472; font-size: 0.9rem; margin: 0 0 1.15rem; }
+    .field { margin-bottom: 1rem; }
+    .field label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .field input, .field select {
+      width: 100%;
+      min-height: 46px;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid #cfd4dc;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 16px;
+      background: #fff;
+    }
+    .pw-wrap {
+      position: relative;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .pw-toggle {
+      min-height: 46px;
+      padding: 0 0.9rem;
+      border: 1px solid #cfd4dc;
+      border-radius: 6px;
+      background: #f9fafb;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      background: #b83227;
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      padding: 0.78rem 1.35rem;
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn:hover { background: #9f2920; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-secondary { background: #16181d; }
+    .btn-secondary:hover { background: #2b303a; }
+    .btn-danger {
+      background: #dc2626;
+      min-height: 38px;
+      padding: 0.42rem 0.75rem;
+      font-size: 0.84rem;
+    }
+    .progress-wrap {
+      margin-top: 0.9rem;
+      background: #e5e7eb;
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #b83227;
+      transition: width 0.15s ease;
+    }
+    .status { margin-top: 0.75rem; font-size: 0.9rem; font-weight: 500; }
+    .status.ok { color: #15803d; }
+    .status.err { color: #b91c1c; }
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1rem;
+    }
+    .media-card {
+      border: 1px solid #dcdfe5;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+    }
+    .media-thumb {
+      height: 150px;
+      background: #111;
+    }
+    .media-thumb img, .media-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .media-body {
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      flex: 1;
+      justify-content: space-between;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.18rem 0.5rem;
+      border-radius: 4px;
+      background: #e5e7eb;
+      color: #1f2937;
+      width: fit-content;
+    }
+    .media-title { font-size: 0.88rem; font-weight: 600; }
+    .hidden { display: none; }
+    @media (max-width: 640px) {
+      .row { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <strong>Altınçekiç Sunroof — Usta Medya Paneli</strong>
+    <div style="display:flex; gap:0.5rem;">
+      <a href="/">Siteye Dön</a>
+      <button id="logoutBtn" class="hidden" type="button">Çıkış Yap</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Login Card -->
+    <section class="card" id="loginCard">
+      <h1>Usta Girişi</h1>
+      <p class="muted">Telefondan veya bilgisayardan fotoğraf ve video eklemek için şifrenizi girin.</p>
+      <form id="loginForm">
+        <div class="field">
+          <label for="password">Şifre</label>
+          <div class="pw-wrap">
+            <input type="password" id="password" placeholder="Yönetici şifresini girin" required />
+            <button type="button" class="pw-toggle" id="pwToggle">Göster</button>
+          </div>
+        </div>
+        <button type="submit" class="btn">Giriş Yap</button>
+        <div id="loginStatus" class="status"></div>
+      </form>
+    </section>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="hidden">
+      <section class="card">
+        <h2>Telefondan / Bilgisayardan Fotoğraf veya Video Ekle</h2>
+        <p class="muted">Galerinizden seçin veya doğrudan telefon kamerasıyla çekip sitenin istediğiniz yerine yükleyin.</p>
+        <form id="uploadForm">
+          <div class="row">
+            <div class="field">
+              <label for="mediaFile">Fotoğraf veya Video Seç *</label>
+              <input type="file" id="mediaFile" accept="image/*,video/*" multiple required />
+            </div>
+            <div class="field">
+              <label for="placement">Sitede Nerede Görünsün?</label>
+              <select id="placement">
+                <option value="gallery">Fotoğraf &amp; İşçilik Galerisi</option>
+                <option value="video">Uygulama Videoları Bölümü</option>
+                <option value="slider">Üst Slider (Vitrin)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="mediaTitle">Başlık / Açıklama (İsteğe bağlı)</label>
+            <input type="text" id="mediaTitle" placeholder="Örn: BMW F30 Sunroof Kızak Değişimi" />
+          </div>
+          <button type="submit" id="uploadBtn" class="btn">Siteye Yükle</button>
+          <div id="progressWrap" class="progress-wrap hidden">
+            <div id="progressBar" class="progress-bar"></div>
+          </div>
+          <div id="uploadStatus" class="status"></div>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Sitedeki Mevcut Fotoğraf ve Videolar</h2>
+        <p class="muted">İstemediğiniz içerikleri tek tıkla kaldırabilirsiniz.</p>
+        <div id="mediaList" class="media-grid"></div>
+      </section>
+
+      <section class="card">
+        <h2>Panel Şifresini Değiştir</h2>
+        <p class="muted">İsterseniz giriş şifresini buradan güncelleyebilirsiniz (en az 8 karakter).</p>
+        <form id="pwChangeForm">
+          <div class="field">
+            <label for="newPassword">Yeni Şifre</label>
+            <input type="password" id="newPassword" minlength="8" placeholder="En az 8 karakterli yeni şifre" required />
+          </div>
+          <button type="submit" class="btn btn-secondary">Şifreyi Güncelle</button>
+          <div id="pwStatus" class="status"></div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const TOKEN_KEY = 'altincekic_admin_token';
+    const loginCard = document.getElementById('loginCard');
+    const adminPanel = document.getElementById('adminPanel');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const loginForm = document.getElementById('loginForm');
+    const loginStatus = document.getElementById('loginStatus');
+    const pwInput = document.getElementById('password');
+    const pwToggle = document.getElementById('pwToggle');
+    const uploadForm = document.getElementById('uploadForm');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const progressWrap = document.getElementById('progressWrap');
+    const progressBar = document.getElementById('progressBar');
+    const uploadStatus = document.getElementById('uploadStatus');
+    const mediaList = document.getElementById('mediaList');
+    const pwChangeForm = document.getElementById('pwChangeForm');
+    const pwStatus = document.getElementById('pwStatus');
+
+    const PLACEMENT_LABELS = {
+      slider: 'Üst Slider',
+      video: 'Videolar',
+      gallery: 'Galeri'
+    };
+
+    if (pwToggle && pwInput) {
+      pwToggle.addEventListener('click', () => {
+        const show = pwInput.type === 'password';
+        pwInput.type = show ? 'text' : 'password';
+        pwToggle.textContent = show ? 'Gizle' : 'Göster';
+      });
+    }
+
+    function getToken() {
+      return localStorage.getItem(TOKEN_KEY) || '';
+    }
+
+    function setLoggedIn(state) {
+      loginCard.classList.toggle('hidden', state);
+      adminPanel.classList.toggle('hidden', !state);
+      logoutBtn.classList.toggle('hidden', !state);
+      if (state) loadMedia();
+    }
+
+    async function checkSession() {
+      const token = getToken();
+      if (!token) return setLoggedIn(false);
+      try {
+        const res = await fetch('/api/session', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await res.json();
+        setLoggedIn(Boolean(data.authenticated));
+      } catch {
+        setLoggedIn(false);
+      }
+    }
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      loginStatus.textContent = '';
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pwInput.value })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) {
+          loginStatus.className = 'status err';
+          loginStatus.textContent = data.error || 'Giriş başarısız.';
+          return;
+        }
+        localStorage.setItem(TOKEN_KEY, data.token);
+        setLoggedIn(true);
+      } catch {
+        loginStatus.className = 'status err';
+        loginStatus.textContent = 'Sunucuya bağlanılamadı.';
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem(TOKEN_KEY);
+      setLoggedIn(false);
+    });
+
+    function uploadFileWithProgress(file, placement, title, onProgress) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/upload');
+        xhr.setRequestHeader('Authorization', `Bearer ${getToken()}`);
+        xhr.setRequestHeader('X-File-Name', encodeURIComponent(file.name));
+        xhr.setRequestHeader('X-Mime-Type', file.type || '');
+        xhr.setRequestHeader('X-Placement', placement);
+        xhr.setRequestHeader('X-Title', encodeURIComponent(title || file.name.replace(/\.[^.]+$/, '')));
+
+        xhr.upload.onprogress = (ev) => {
+          if (ev.lengthComputable && onProgress) {
+            onProgress(Math.round((ev.loaded / ev.total) * 100));
+          }
+        };
+
+        xhr.onload = () => {
+          try {
+            const data = JSON.parse(xhr.responseText || '{}');
+            if (xhr.status >= 200 && xhr.status < 300 && data.ok) resolve(data);
+            else reject(new Error(data.error || 'Yükleme hatası.'));
+          } catch {
+            reject(new Error('Sunucu yanıtı okunamadı.'));
+          }
+        };
+
+        xhr.onerror = () => reject(new Error('Bağlantı hatası.'));
+        xhr.send(file);
+      });
+    }
+
+    uploadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const files = Array.from(document.getElementById('mediaFile').files || []);
+      if (!files.length) return;
+
+      const placement = document.getElementById('placement').value;
+      const title = document.getElementById('mediaTitle').value.trim();
+
+      uploadBtn.disabled = true;
+      progressWrap.classList.remove('hidden');
+      progressBar.style.width = '0%';
+      uploadStatus.className = 'status';
+
+      let successCount = 0;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        try {
+          await uploadFileWithProgress(file, placement, title, (pct) => {
+            progressBar.style.width = `${pct}%`;
+            uploadStatus.textContent = `Yükleniyor (${i + 1}/${files.length}): %${pct}`;
+          });
+          successCount++;
+        } catch (err) {
+          uploadStatus.className = 'status err';
+          uploadStatus.textContent = err.message;
+        }
+      }
+
+      uploadBtn.disabled = false;
+      if (successCount > 0) {
+        progressBar.style.width = '100%';
+        uploadStatus.className = 'status ok';
+        uploadStatus.textContent = `${successCount} dosya başarıyla siteye eklendi.`;
+        uploadForm.reset();
+        loadMedia();
+      }
+    });
+
+    pwChangeForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const newPassword = document.getElementById('newPassword').value.trim();
+      pwStatus.textContent = '';
+      const res = await fetch('/api/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${getToken()}`
+        },
+        body: JSON.stringify({ newPassword })
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        pwStatus.className = 'status ok';
+        pwStatus.textContent = 'Şifreniz başarıyla güncellendi.';
+        pwChangeForm.reset();
+      } else {
+        pwStatus.className = 'status err';
+        pwStatus.textContent = data.error || 'Şifre güncellenemedi.';
+      }
+    });
+
+    async function loadMedia() {
+      const res = await fetch('/api/media');
+      const data = await res.json();
+      const items = data.items || [];
+      if (!items.length) {
+        mediaList.innerHTML = '<p class="muted">Henüz eklenmiş medya yok.</p>';
+        return;
+      }
+
+      mediaList.innerHTML = items.map((item) => {
+        const thumb = item.mediaType === 'video'
+          ? `<video src="${item.url}" muted playsinline preload="metadata"></video>`
+          : `<img src="${item.url}" alt="${escapeHtml(item.title)}" />`;
+        return `
+          <div class="media-card">
+            <div class="media-thumb">${thumb}</div>
+            <div class="media-body">
+              <div>
+                <span class="badge">${PLACEMENT_LABELS[item.placement] || item.placement} • ${item.mediaType === 'video' ? 'Video' : 'Fotoğraf'}</span>
+                <div class="media-title">${escapeHtml(item.title)}</div>
+              </div>
+              <button class="btn btn-danger" onclick="deleteMedia('${item.id}')">Sil</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.deleteMedia = async function (id) {
+      if (!confirm('Bu içeriği siteden kaldırmak istediğinize emin misiniz?')) return;
+      const res = await fetch(`/api/media/${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${getToken()}` }
+      });
+      if (res.ok) loadMedia();
+    };
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    checkSession();
+  </script>
+</body>
+</html>

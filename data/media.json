@@ -1,0 +1,34 @@
+[
+  {
+    "id": "seed-1",
+    "url": "assets/hero-sunroof.jpg",
+    "mediaType": "image",
+    "placement": "slider",
+    "title": "Panoramik Cam Tavan & Sunroof Bakımı",
+    "createdAt": "2026-11-25T11:11:42.635Z"
+  },
+  {
+    "id": "seed-2",
+    "url": "assets/workshop-precision.jpg",
+    "mediaType": "image",
+    "placement": "slider",
+    "title": "Kızak, Ray & Mekanizma Onarımı",
+    "createdAt": "2026-11-25T11:11:42.635Z"
+  },
+  {
+    "id": "seed-3",
+    "url": "assets/workshop-precision.jpg",
+    "mediaType": "image",
+    "placement": "gallery",
+    "title": "Mekanizma & Ray Kalibrasyonu",
+    "createdAt": "2026-11-25T11:11:42.635Z"
+  },
+  {
+    "id": "seed-4",
+    "url": "assets/interior-sunshade.jpg",
+    "mediaType": "image",
+    "placement": "gallery",
+    "title": "Tavan Döşemesine Sıfır Hasar Teslimat",
+    "createdAt": "2026-11-25T11:11:42.635Z"
+  }
+]
