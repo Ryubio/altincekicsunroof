@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = '905334771406';
+const WHATSAPP_NUMBER = '905415903077';
 
 // Mobile Menu
 const menuToggle = document.getElementById('menuToggle');
@@ -137,7 +137,7 @@ async function loadSiteMedia() {
       if (!videoItems.length) {
         videoGrid.innerHTML = `
           <div class="empty-note">
-            Henüz video eklenmedi. Usta panelinden (<a href="/admin.html" style="text-decoration:underline;font-weight:600;">Usta Girişi</a>) kolayca uygulama videosu ekleyebilirsiniz.
+            Henüz video eklenmedi. Usta panelinden (<a href="admin.html" style="text-decoration:underline;font-weight:600;">Usta Girişi</a>) kolayca uygulama videosu ekleyebilirsiniz.
           </div>
         `;
       } else {
@@ -159,7 +159,7 @@ async function loadSiteMedia() {
       if (!galleryItems.length) {
         galleryGrid.innerHTML = `
           <div class="empty-note">
-            Henüz galeri görseli eklenmedi. <a href="/admin.html" style="text-decoration:underline;font-weight:600;">Usta Girişi</a> üzerinden fotoğraf ekleyebilirsiniz.
+            Henüz galeri görseli eklenmedi. <a href="admin.html" style="text-decoration:underline;font-weight:600;">Usta Girişi</a> üzerinden fotoğraf ekleyebilirsiniz.
           </div>
         `;
       } else {
@@ -203,7 +203,7 @@ if (waForm) {
     }
 
     const msg =
-      `Merhaba Halil Usta (Altınçekiç Sunroof),%0A` +
+      `Merhaba Altınçekiç Sunroof,%0A` +
       `Ad Soyad: ${encodeURIComponent(fullName)}%0A` +
       (phone ? `Telefon: ${encodeURIComponent(phone)}%0A` : '') +
       `Araç: ${encodeURIComponent(carModel)}%0A` +
